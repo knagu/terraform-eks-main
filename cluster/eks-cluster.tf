@@ -4,7 +4,7 @@ data "terraform_remote_state" "cluster" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-SG"
+      name = "my-ECR"
     }
   }
 }
@@ -51,12 +51,4 @@ data "aws_ami" "eks_worker" {
 
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
-}
-
-resource "aws_ecr_repository" "ecr" {
-  name                 = "weatherapi"
-  image_tag_mutability = "MUTABLE"
-  tags = {    
-    Environment = "dev"
-  }      
 }
