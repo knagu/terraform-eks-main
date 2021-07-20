@@ -12,4 +12,12 @@ output "cluster_id" {
     value       = module.eks.cluster_id
 }
 
- 
+output "ecr_arn" {
+    value = data.terraform_remote_state.cluster.outputs.ecr_arn
+}
+output "ecr_repository_url" {
+    value = data.terraform_remote_state.cluster.outputs.ecr_repository_url
+}
+output "ecr_registry_id" {
+    value = data.terraform_remote_state.cluster.outputs.ecr_registry_id
+}
