@@ -28,11 +28,28 @@ resource "aws_security_group" "worker_group" {
   }
 }
 
+resource "aws_security_group" "sql_server" {
+  name   = "sql_server_sg"
+  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+
+  ingress {
+    from_port   = 1443
+    protocol    = "tcp"
+    to_port     = 1443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
 output "worker_security_group_id" {
   description = "Security group ids attached to the worker node."
   value       = [aws_security_group.worker_group.id]
 }
 
+output "databse_security_group_id" {
+  description = "Security group ids attached to the db."
+  value = [aws_security_group.sql_server.id]
+}
 output "vpc_id" {
   description = "VPC ID."
   value       = data.terraform_remote_state.vpc.outputs.vpc_id
@@ -46,4 +63,8 @@ output "private_subnets" {
 output "cluster_name" {
   description = "cluster name"
   value       = data.terraform_remote_state.vpc.outputs.cluster_name
+}
+
+output "database_subnets" {
+  value = data.terraform_remote_state.vpc.outputs.database_subnets
 }

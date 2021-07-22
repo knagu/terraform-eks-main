@@ -21,3 +21,25 @@ output "ecr_repository_url" {
 output "ecr_registry_id" {
     value = data.terraform_remote_state.cluster.outputs.ecr_registry_id
 }
+
+output "db_instance_address" {
+  description = "The address of the RDS instance"
+  value       = data.terraform_remote_state.cluster.outputs.db_instance_address
+}
+
+output "db_instance_endpoint" {
+  description = "The connection endpoint"
+  value       = data.terraform_remote_state.cluster.outputs.db_instance_endpoint
+}
+
+output "db_instance_id" {
+  description = "The RDS instance ID"
+  value       =  data.terraform_remote_state.cluster.outputs.db_instance_id
+}
+
+output "db_instance_username" {
+  description = "The master username for the database"
+  value       =  data.terraform_remote_state.cluster.outputs.db_instance_username
+  sensitive   = true
+}
+

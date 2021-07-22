@@ -4,7 +4,7 @@ data "terraform_remote_state" "cluster" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-ECR"
+      name = "my-MSSQL"
     }
   }
 }

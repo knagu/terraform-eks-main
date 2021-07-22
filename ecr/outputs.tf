@@ -17,6 +17,14 @@ output "cluster_name" {
   value       = data.terraform_remote_state.sg.outputs.cluster_name
 }
 
+output "databse_security_group_id" {
+  description = "Security group ids attached to the db"
+  value = data.terraform_remote_state.sg.outputs.databse_security_group_id
+}
+output "database_subnets" {
+  value = data.terraform_remote_state.sg.outputs.database_subnets
+}
+
 output "ecr_arn" {
     value = aws_ecr_repository.ecr.arn
 }
@@ -26,3 +34,4 @@ output "ecr_repository_url" {
 output "ecr_registry_id" {
     value = aws_ecr_repository.ecr.registry_id
 }
+

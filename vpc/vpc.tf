@@ -2,6 +2,7 @@ data "aws_availability_zones" "available" {}
 
 locals {
   cluster_name = "learning-eks-${random_string.suffix.result}"
+
 }
 
 resource "random_string" "suffix" {
@@ -18,6 +19,8 @@ module "vpc" {
   azs                  = data.aws_availability_zones.available.names
   private_subnets      = ["10.0.1.0/24", "10.0.2.0/24"]
   public_subnets       = ["10.0.3.0/24", "10.0.4.0/24"]
+  database_subnets     = ["10.0.5.0/24", "10.0.6.0/24"]
+  create_database_subnet_group = true
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
@@ -34,6 +37,10 @@ module "vpc" {
   private_subnet_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"             = "1"
+  }
+  database_subnet_tags = {
+    Owner       = "user"
+    Environment = "learning"
   }
 }
 
@@ -53,3 +60,7 @@ output "cluster_name" {
   value       = local.cluster_name
 }
 
+output "database_subnets" {
+  description = "database subnets"
+  value = module.vpc.database_subnets
+}
