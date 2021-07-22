@@ -21,9 +21,10 @@ module "db" {
 
   identifier = "learning-db-mssql"
 
-  engine               = "sqlserver-ex"
-  engine_version       = "15.00.4073.23.v1"
-  family               = "sqlserver-ex-15.0" # DB parameter group
+  
+  engine               = "sqlserver-ex"      # SQL server edition (express, standard, web, enterprise)
+  engine_version       = "15.00.4073.23.v1"  
+  family               = "sqlserver-ex-15.0" # DB parameter group based on engine
   major_engine_version = "15.00"             # DB option group
   instance_class       = "db.t3.small"
 
