@@ -33,11 +33,11 @@ module "db" {
   identifier = "learning-db-mssql"
 
 
-  engine               = "sqlserver-se" # SQL server edition (express, standard, web, enterprise)
+  engine               = "sqlserver-ex" # SQL server edition (express, standard, web, enterprise)
   engine_version       = "15.00.4073.23.v1"
-  family               = "sqlserver-se-15.0" # DB parameter group based on engine
+  family               = "sqlserver-ex-15.0" # DB parameter group based on engine
   major_engine_version = "15.00"             # DB option group
-  instance_class       = "db.m5.large"
+  instance_class       = "db.t3.small"
 
   allocated_storage     = 20
   max_allocated_storage = 100
