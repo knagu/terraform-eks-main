@@ -26,6 +26,12 @@ resource "aws_security_group" "worker_group" {
     to_port     = 443
     cidr_blocks = ["0.0.0.0/0"]
   }
+  egress {
+    from_port   = 0
+    protocol    = "-1"
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "sql_server" {
@@ -33,9 +39,15 @@ resource "aws_security_group" "sql_server" {
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {
-    from_port   = 1443
+    from_port   = 1433
     protocol    = "tcp"
-    to_port     = 1443
+    to_port     = 1433
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    protocol    = "-1"
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -46,25 +58,7 @@ output "worker_security_group_id" {
   value       = [aws_security_group.worker_group.id]
 }
 
-output "databse_security_group_id" {
+output "database_security_group_id" {
   description = "Security group ids attached to the db."
-  value = [aws_security_group.sql_server.id]
-}
-output "vpc_id" {
-  description = "VPC ID."
-  value       = data.terraform_remote_state.vpc.outputs.vpc_id
-}
-
-output "private_subnets" {
-  description = "VPC ID."
-  value       = data.terraform_remote_state.vpc.outputs.private_subnets
-}
-
-output "cluster_name" {
-  description = "cluster name"
-  value       = data.terraform_remote_state.vpc.outputs.cluster_name
-}
-
-output "database_subnets" {
-  value = data.terraform_remote_state.vpc.outputs.database_subnets
+  value       = [aws_security_group.sql_server.id]
 }

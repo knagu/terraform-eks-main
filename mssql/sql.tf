@@ -1,47 +1,59 @@
-data "terraform_remote_state" "ecr" {
+data "terraform_remote_state" "vpc" {
   backend = "remote"
 
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-ECR"
+      name = "my-VPC"
+    }
+  }
+}
+
+data "terraform_remote_state" "sg" {
+  backend = "remote"
+
+  config = {
+    organization = "Harika"
+    workspaces = {
+      name = "my-SG"
     }
   }
 }
 
 locals {
-    tags = {
-      Environment = "learning"
+  tags = {
+    Environment = "learning"
   }
 }
 
 module "db" {
-  source = "terraform-aws-modules/rds/aws"
+  source  = "terraform-aws-modules/rds/aws"
   version = "~> 3.0"
 
   identifier = "learning-db-mssql"
 
-  
-  engine               = "sqlserver-ex"      # SQL server edition (express, standard, web, enterprise)
-  engine_version       = "15.00.4073.23.v1"  
-  family               = "sqlserver-ex-15.0" # DB parameter group based on engine
+
+  engine               = "sqlserver-se" # SQL server edition (express, standard, web, enterprise)
+  engine_version       = "15.00.4073.23.v1"
+  family               = "sqlserver-se-15.0" # DB parameter group based on engine
   major_engine_version = "15.00"             # DB option group
-  instance_class       = "db.t3.small"
+  instance_class       = "db.m5.large"
 
   allocated_storage     = 20
   max_allocated_storage = 100
   storage_encrypted     = false
 
-  name                   = nul
-  username               = "mssql_user"
-  password               =  var.sql_password
-  port                   = 1433
-  
+  name     = null
+  username = "mssql_user"
+  password = var.sql_password
+  port     = 1433
+
 
   multi_az               = false
-  subnet_ids             = data.terraform_remote_state.ecr.outputs.database_subnets
-  vpc_security_group_ids = data.terraform_remote_state.ecr.outputs.databse_security_group_id
- 
+  subnet_ids             = data.terraform_remote_state.vpc.outputs.database_subnets
+  vpc_security_group_ids = data.terraform_remote_state.sg.outputs.database_security_group_id
+  publicly_accessible    = true
+
 
   backup_retention_period = 0
   skip_final_snapshot     = true
