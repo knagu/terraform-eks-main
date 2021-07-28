@@ -42,13 +42,13 @@ module "vpc" {
   private_subnets                = ["10.0.1.0/24", "10.0.2.0/24"]
   public_subnets                 = ["10.0.3.0/24", "10.0.4.0/24"]
   database_subnets               = ["10.0.5.0/24", "10.0.6.0/24"]    
-  database_inbound_acl_rules     = local.network_acls["database_inbound"]
-  database_outbound_acl_rules    = local.network_acls["database_outbound"]
+  #database_inbound_acl_rules     = local.network_acls["database_inbound"]
+  #database_outbound_acl_rules    = local.network_acls["database_outbound"]
   create_database_subnet_group   = true
-  database_dedicated_network_acl = true 
+  #database_dedicated_network_acl = true 
 
-  #create_database_subnet_route_table     = true
-  #create_database_internet_gateway_route = true
+  create_database_subnet_route_table     = true
+  create_database_internet_gateway_route = true
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true

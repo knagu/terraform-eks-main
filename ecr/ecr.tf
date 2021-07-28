@@ -5,3 +5,11 @@ resource "aws_ecr_repository" "ecr" {
     Environment = "dev"
   }
 }
+
+resource "aws_ecr_repository" "user" {
+  name                 = "user"
+  image_tag_mutability = "MUTABLE"
+  tags = {
+    Environment = "dev"
+  }
+}
