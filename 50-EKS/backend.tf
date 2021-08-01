@@ -3,7 +3,7 @@ terraform {
     organization = "Harika"
 
     workspaces {
-      name = "my-MSSQL"
+      name = "50-EKS"
     }
   }
 }

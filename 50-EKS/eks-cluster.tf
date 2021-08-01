@@ -4,7 +4,7 @@ data "terraform_remote_state" "mssql" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-MSSQL"
+      name = "45-MSSQL"
     }
   }
 }
@@ -14,7 +14,7 @@ data "terraform_remote_state" "ecr" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-ECR"
+      name = "30-ECR"
     }
   }
 }
@@ -24,7 +24,7 @@ data "terraform_remote_state" "sg" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-SG"
+      name = "20-SG"
     }
   }
 }
@@ -34,7 +34,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-VPC"
+      name = "10-VPC"
     }
   }
 }

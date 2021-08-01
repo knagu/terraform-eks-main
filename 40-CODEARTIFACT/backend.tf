@@ -3,7 +3,7 @@ terraform {
     organization = "Harika"
 
     workspaces {
-      name = "my-CLUSTER"
+      name = "40-CODEARTIFACT"
     }
   }
 }

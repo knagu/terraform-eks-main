@@ -4,7 +4,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-VPC"
+      name = "10-VPC"
     }
   }
 }
@@ -15,7 +15,7 @@ data "terraform_remote_state" "sg" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "my-SG"
+      name = "20-SG"
     }
   }
 }

@@ -1,10 +1,9 @@
-
 terraform {
   backend "remote" {
     organization = "Harika"
 
     workspaces {
-      name = "my-ECR"
+      name = "45-MSSQL"
     }
   }
 }

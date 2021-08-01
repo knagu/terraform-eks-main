@@ -1,5 +1,16 @@
 data "aws_availability_zones" "available" {}
 
+data "terraform_remote_state" "iam" {
+  backend = "remote"
+
+  config = {
+    organization = "Harika"
+    workspaces = {
+      name = "05-IAM"
+    }
+  }
+}
+
 locals {
   cluster_name = "learning-eks-${random_string.suffix.result}"
   network_acls = {    
