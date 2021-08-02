@@ -20,6 +20,17 @@ data "terraform_remote_state" "sg" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "remote"
+
+  config = {
+    organization = "Harika"
+    workspaces = {
+      name = "05-IAM"
+    }
+  }
+}
+
 locals {
   tags = {
     Environment = "learning"

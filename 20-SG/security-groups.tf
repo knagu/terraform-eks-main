@@ -9,6 +9,17 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "remote"
+
+  config = {
+    organization = "Harika"
+    workspaces = {
+      name = "05-IAM"
+    }
+  }
+}
+
 resource "aws_security_group" "worker_group" {
   name   = "worker_group_node"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
