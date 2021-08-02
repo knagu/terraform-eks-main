@@ -1,3 +1,14 @@
+data "terraform_remote_state" "iam" {
+  backend = "remote"
+
+  config = {
+    organization = "Harika"
+    workspaces = {
+      name = "05-IAM"
+    }
+  }
+}
+
 resource "aws_kms_key" "codeartifact_key" {
   description = "domain key"
 }

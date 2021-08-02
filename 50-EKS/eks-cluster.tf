@@ -39,6 +39,17 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "remote"
+
+  config = {
+    organization = "Harika"
+    workspaces = {
+      name = "05-IAM"
+    }
+  }
+}
+
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = data.terraform_remote_state.vpc.outputs.cluster_name
