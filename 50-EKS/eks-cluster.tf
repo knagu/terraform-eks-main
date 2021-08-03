@@ -63,14 +63,17 @@ module "eks" {
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
   workers_group_defaults = {
     root_volume_type = "gp2"
-    root_volume_size = 8
+    root_volume_size = 8    
+    capacity_rebalance = true    
   }
 
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "t2.medium"
-      asg_desired_capacity          = 1
+      instance_type                 = "t2.medium"      
+      asg_min_size                  = 1
+      asg_max_size                  = 1
+      asg_desired_capacity          = 1      
       additional_security_group_ids = data.terraform_remote_state.sg.outputs.worker_security_group_id
     },
   ]

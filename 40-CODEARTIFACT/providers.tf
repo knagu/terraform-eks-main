@@ -38,6 +38,6 @@ provider "aws" {
   #access_key = var.aws_access_key
   #secret_key = var.aws_secret_key
   access_key = data.terraform_remote_state.iam.outputs.codeartifact_access
-  secret_key = data.terraform_remote_state.iam.outputs.codeartifact_secret
+  secret_key = base64decode(data.terraform_remote_state.iam.outputs.codeartifact_secret)
   region     = var.aws_region
 }
