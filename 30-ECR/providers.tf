@@ -34,9 +34,7 @@ terraform {
   required_version = "> 0.12"
 }
 
-provider "aws" {
-  #access_key = var.aws_access_key
-  #secret_key = var.aws_secret_key
+provider "aws" { 
   access_key = data.terraform_remote_state.iam.outputs.ecr_access
   secret_key = base64decode(data.terraform_remote_state.iam.outputs.ecr_secret)
   region     = var.aws_region
