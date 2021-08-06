@@ -52,3 +52,12 @@ output "eks_secret" {
   sensitive = true
 }
 
+output "s3_access" {
+  value = aws_iam_access_key.s3_access_key.id
+}
+
+output "s3_secret" {
+  value     = base64encode(aws_iam_access_key.s3_access_key.secret)
+  sensitive = true
+}
+

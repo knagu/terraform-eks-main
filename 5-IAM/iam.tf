@@ -265,4 +265,34 @@ resource "aws_iam_user_policy" "eks_user_policy" {
 EOF
 }
 
+###### S3 USER #######
+################################
 
+resource "aws_iam_user" "s3" {
+  name = "s3-user"
+  path = "/terraform/"
+}
+
+resource "aws_iam_access_key" "s3_access_key" {
+  user = aws_iam_user.s3.name
+}
+
+resource "aws_iam_user_policy" "s3_user_policy" {
+  name = "s3-user-policy"
+  user = aws_iam_user.s3.name
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [              
+              "s3:*"
+      ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
