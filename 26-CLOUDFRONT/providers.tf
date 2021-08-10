@@ -35,7 +35,7 @@ terraform {
 }
 
 provider "aws" { 
-  access_key = data.terraform_remote_state.iam.outputs.acm_access
-  secret_key = base64decode(data.terraform_remote_state.iam.outputs.acm_secret)
+  access_key = data.terraform_remote_state.iam.outputs.cloudfront_access
+  secret_key = base64decode(data.terraform_remote_state.iam.outputs.cloudfront_secret)
   region     = var.aws_region
 }

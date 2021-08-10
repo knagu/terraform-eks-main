@@ -296,3 +296,71 @@ resource "aws_iam_user_policy" "s3_user_policy" {
 }
 EOF
 }
+
+###### ACM USER #######
+########################
+
+resource "aws_iam_user" "acm" {
+  name = "acm-user"
+  path = "/terraform/"
+}
+
+resource "aws_iam_access_key" "acm_access_key" {
+  user = aws_iam_user.acm.name
+}
+
+resource "aws_iam_user_policy" "acm_user_policy" {
+  name = "acm-user-policy"
+  user = aws_iam_user.acm.name
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [              
+              "acm:*"
+      ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+
+###### CLOUDFRONT USER #######
+########################
+
+resource "aws_iam_user" "cloudfront" {
+  name = "cloudfront-user"
+  path = "/terraform/"
+}
+
+resource "aws_iam_access_key" "cloudfront_access_key" {
+  user = aws_iam_user.cloudfront.name
+}
+
+resource "aws_iam_user_policy" "cloudfront_user_policy" {
+  name = "cloudfront-user-policy"
+  user = aws_iam_user.cloudfront.name
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [              
+              "cloudfront:*",
+              "s3:*",
+              "iam:*"
+
+      ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+

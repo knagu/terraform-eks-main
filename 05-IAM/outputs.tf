@@ -61,3 +61,20 @@ output "s3_secret" {
   sensitive = true
 }
 
+output "acm_access" {
+  value = aws_iam_access_key.acm_access_key.id
+}
+
+output "acm_secret" {
+  value     = base64encode(aws_iam_access_key.acm_access_key.secret)
+  sensitive = true
+}
+
+output "cloudfront_access" {
+  value = aws_iam_access_key.cloudfront_access_key.id
+}
+
+output "cloudfront_secret" {
+  value     = base64encode(aws_iam_access_key.cloudfront_access_key.secret)
+  sensitive = true
+}
