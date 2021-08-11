@@ -52,12 +52,12 @@ output "eks_secret" {
   sensitive = true
 }
 
-output "s3_access" {
-  value = aws_iam_access_key.s3_access_key.id
+output "ui_access" {
+  value = aws_iam_access_key.ui_access_key.id
 }
 
-output "s3_secret" {
-  value     = base64encode(aws_iam_access_key.s3_access_key.secret)
+output "ui_secret" {
+  value     = base64encode(aws_iam_access_key.ui_access_key.secret)
   sensitive = true
 }
 
@@ -70,11 +70,4 @@ output "acm_secret" {
   sensitive = true
 }
 
-output "cloudfront_access" {
-  value = aws_iam_access_key.cloudfront_access_key.id
-}
 
-output "cloudfront_secret" {
-  value     = base64encode(aws_iam_access_key.cloudfront_access_key.secret)
-  sensitive = true
-}

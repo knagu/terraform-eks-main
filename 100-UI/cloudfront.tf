@@ -33,6 +33,8 @@ resource "aws_cloudfront_distribution" "test_distribution" {
   comment             = "managed by terraform"
   default_root_object = "index.html"
 
+ aliases = ["test.daxeos.io"]
+
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -77,6 +79,8 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
   comment             = "managed by terraform"
   default_root_object = "index.html"
 
+ aliases = ["portal.daxeos.io"]
+
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -119,6 +123,8 @@ resource "aws_cloudfront_distribution" "header_distribution" {
   is_ipv6_enabled     = true
   comment             = "managed by terraform"
   default_root_object = "index.html"
+
+ aliases = ["header.daxeos.io"]
 
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
@@ -164,6 +170,8 @@ resource "aws_cloudfront_distribution" "sidebar_distribution" {
   comment             = "managed by terraform"
   default_root_object = "index.html"
 
+ aliases = ["sidebar.daxeos.io"]
+
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -207,6 +215,8 @@ resource "aws_cloudfront_distribution" "user_distribution" {
   comment             = "managed by terraform"
   default_root_object = "index.html"
 
+ aliases = ["user.daxeos.io"]
+
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -237,7 +247,7 @@ resource "aws_cloudfront_distribution" "user_distribution" {
 
 
 
-#CloudFront for Header bucket
+#CloudFront for styleguide bucket
 resource "aws_cloudfront_distribution" "styleguide_distribution" {
   origin {
     domain_name = aws_s3_bucket.styleguide.bucket_regional_domain_name
@@ -250,6 +260,8 @@ resource "aws_cloudfront_distribution" "styleguide_distribution" {
   is_ipv6_enabled     = true
   comment             = "managed by terraform"
   default_root_object = "index.html"
+
+ aliases = ["styleguide.daxeos.io"]
 
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
