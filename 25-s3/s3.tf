@@ -11,7 +11,7 @@ data "terraform_remote_state" "iam" {
 
 resource "aws_s3_bucket" "test" {
   bucket = "test1.taktical.systems"
-  acl    = "public-read"
+  #acl    = "authenticated-read"
   policy = file("policies/test-policy.json")
 
   website {
