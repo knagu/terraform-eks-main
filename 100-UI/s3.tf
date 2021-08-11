@@ -11,7 +11,7 @@ data "terraform_remote_state" "iam" {
 
 resource "aws_s3_bucket" "header" {
   bucket = "header.daxeos.io"
-  acl    = "public-read"
+  acl    = "private"
   policy = file("policies/header-policy.json")
 
   website {
@@ -29,9 +29,19 @@ resource "aws_s3_bucket" "header" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket_public_access_block" "header" {
+  bucket = aws_s3_bucket.header.id
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+}
+
+#################################################################################
+
 resource "aws_s3_bucket" "portal" {
   bucket = "portal.daxeos.io"
-  acl    = "public-read"
+  acl    = "private"
   policy = file("policies/portal-policy.json")
 
   website {
@@ -48,9 +58,20 @@ resource "aws_s3_bucket" "portal" {
   }
   force_destroy = true
 }
+
+resource "aws_s3_bucket_public_access_block" "portal" {
+  bucket = aws_s3_bucket.portal.id
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+}
+
+#################################################################################
+
 resource "aws_s3_bucket" "sidebar" {
   bucket = "sidebar.daxeos.io"
-  acl    = "public-read"
+  acl    = "private"
   policy = file("policies/sidebar-policy.json")
 
   website {
@@ -67,9 +88,20 @@ resource "aws_s3_bucket" "sidebar" {
   }
   force_destroy = true
 }
+
+resource "aws_s3_bucket_public_access_block" "sidebar" {
+  bucket = aws_s3_bucket.sidebar.id
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+}
+
+#################################################################################
+
 resource "aws_s3_bucket" "styleguide" {
   bucket = "styleguide.daxeos.io"
-  acl    = "public-read"
+  acl    = "private"
   policy = file("policies/styleguide-policy.json")
 
   website {
@@ -86,9 +118,20 @@ resource "aws_s3_bucket" "styleguide" {
   }
   force_destroy = true
 }
+
+resource "aws_s3_bucket_public_access_block" "styleguide" {
+  bucket = aws_s3_bucket.styleguide.id
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+}
+
+#################################################################################
+
 resource "aws_s3_bucket" "test" {
   bucket = "test.daxeos.io"
-  acl    = "public-read"
+  acl    = "private"
   policy = file("policies/test-policy.json")
 
   website {
@@ -105,9 +148,20 @@ resource "aws_s3_bucket" "test" {
   }
   force_destroy = true
 }
+
+resource "aws_s3_bucket_public_access_block" "test" {
+  bucket = aws_s3_bucket.test.id
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+}
+
+#################################################################################
+
 resource "aws_s3_bucket" "user" {
   bucket = "user.daxeos.io"
-  acl    = "public-read"
+  acl    = "private"
   policy = file("policies/user-policy.json")
 
   website {
@@ -124,3 +178,12 @@ resource "aws_s3_bucket" "user" {
   }
   force_destroy = true
 }
+
+resource "aws_s3_bucket_public_access_block" "user" {
+  bucket = aws_s3_bucket.user.id
+  block_public_acls   = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+}
+
