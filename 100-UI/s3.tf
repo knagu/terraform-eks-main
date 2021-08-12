@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "header" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::header.daxeos.io/*"
+                "arn:aws:s3:::header.daxeos.io/*"                
             ]
         }
     ]
@@ -33,25 +33,25 @@ resource "aws_s3_bucket" "header" {
 EOF
 
   website {
-    index_document = "daxeos-header.js"  
+    index_document = "daxeos-header.js"
   }
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "GET", "DELETE"]
     allowed_origins = ["*"]
-    expose_headers  = []    
+    expose_headers  = []
   }
-  tags = {    
+  tags = {
     Environment = "dev"
   }
   force_destroy = true
 }
 
 resource "aws_s3_bucket_public_access_block" "header" {
-  bucket = aws_s3_bucket.header.id
-  block_public_acls   = true
-  block_public_policy = true
-  ignore_public_acls = true
+  bucket                  = aws_s3_bucket.header.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
@@ -81,25 +81,25 @@ resource "aws_s3_bucket" "portal" {
 EOF
 
   website {
-    index_document = "index.html"  
+    index_document = "index.html"
   }
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "GET", "DELETE"]
     allowed_origins = ["*"]
-    expose_headers  = []    
+    expose_headers  = []
   }
-  tags = {    
+  tags = {
     Environment = "dev"
   }
   force_destroy = true
 }
 
 resource "aws_s3_bucket_public_access_block" "portal" {
-  bucket = aws_s3_bucket.portal.id
-  block_public_acls   = true
-  block_public_policy = true
-  ignore_public_acls = true
+  bucket                  = aws_s3_bucket.portal.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
@@ -129,25 +129,25 @@ resource "aws_s3_bucket" "sidebar" {
 EOF
 
   website {
-    index_document = "daxeos-sidebar.js"  
+    index_document = "daxeos-sidebar.js"
   }
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "GET", "DELETE"]
     allowed_origins = ["*"]
-    expose_headers  = []    
+    expose_headers  = []
   }
-  tags = {    
+  tags = {
     Environment = "dev"
   }
   force_destroy = true
 }
 
 resource "aws_s3_bucket_public_access_block" "sidebar" {
-  bucket = aws_s3_bucket.sidebar.id
-  block_public_acls   = true
-  block_public_policy = true
-  ignore_public_acls = true
+  bucket                  = aws_s3_bucket.sidebar.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
@@ -177,25 +177,25 @@ resource "aws_s3_bucket" "styleguide" {
 EOF
 
   website {
-    index_document = "daxeos-styleguide.js"  
+    index_document = "daxeos-styleguide.js"
   }
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "GET", "DELETE"]
     allowed_origins = ["*"]
-    expose_headers  = []    
+    expose_headers  = []
   }
-  tags = {    
+  tags = {
     Environment = "dev"
   }
   force_destroy = true
 }
 
 resource "aws_s3_bucket_public_access_block" "styleguide" {
-  bucket = aws_s3_bucket.styleguide.id
-  block_public_acls   = true
-  block_public_policy = true
-  ignore_public_acls = true
+  bucket                  = aws_s3_bucket.styleguide.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
@@ -204,7 +204,7 @@ resource "aws_s3_bucket_public_access_block" "styleguide" {
 resource "aws_s3_bucket" "test" {
   bucket = "test.daxeos.io"
   acl    = "private"
-  policy =  <<EOF
+  policy = <<EOF
 {
     "Version": "2012-10-17",
     "Id": "Policy1548223592786",
@@ -225,25 +225,25 @@ resource "aws_s3_bucket" "test" {
 EOF
 
   website {
-    index_document = "daxeos-test-mfe.js"  
+    index_document = "daxeos-test-mfe.js"
   }
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "GET", "DELETE"]
     allowed_origins = ["*"]
-    expose_headers  = []    
+    expose_headers  = []
   }
-  tags = {    
+  tags = {
     Environment = "dev"
   }
   force_destroy = true
 }
 
 resource "aws_s3_bucket_public_access_block" "test" {
-  bucket = aws_s3_bucket.test.id
-  block_public_acls   = true
-  block_public_policy = true
-  ignore_public_acls = true
+  bucket                  = aws_s3_bucket.test.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
@@ -272,24 +272,24 @@ resource "aws_s3_bucket" "user" {
 }
 EOF
   website {
-    index_document = "daxeos-user-mfe.js"  
+    index_document = "daxeos-user-mfe.js"
   }
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "GET", "DELETE"]
     allowed_origins = ["*"]
-    expose_headers  = []    
+    expose_headers  = []
   }
-  tags = {    
+  tags = {
     Environment = "dev"
   }
   force_destroy = true
 }
 
 resource "aws_s3_bucket_public_access_block" "user" {
-  bucket = aws_s3_bucket.user.id
-  block_public_acls   = true
-  block_public_policy = true
-  ignore_public_acls = true
+  bucket                  = aws_s3_bucket.user.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
