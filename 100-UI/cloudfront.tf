@@ -1,14 +1,3 @@
-data "terraform_remote_state" "iam" {
-  backend = "remote"
-
-  config = {
-    organization = "Harika"
-    workspaces = {
-      name = "05-IAM"
-    }
-  }
-}
-
 locals {
     test_s3_origin_id    = "testS3Origin"
     portal_s3_origin_id  = "portalS3Origin"
@@ -17,7 +6,13 @@ locals {
     sidebar_s3_origin_id  = "sidebarS3Origin"
     user_s3_origin_id  = "userS3Origin"
 }
+data "aws_cloudfront_cache_policy" "ManagedCachingOptimized" {
+  name = "Managed-CachingOptimized"
+}
 
+data "aws_cloudfront_origin_request_policy" "Managed-CORS-S3Origin" {
+  name = "Managed-CORS-S3Origin"
+}
 
 #Origin access identity for CloudFront
 resource "aws_cloudfront_origin_access_identity" "OAI" {
@@ -41,18 +36,11 @@ resource "aws_cloudfront_distribution" "test_distribution" {
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.test_s3_origin_id
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    origin_request_policy_id = "CORS-S3Origin"
+    target_origin_id = local.test_s3_origin_id    
+    viewer_protocol_policy = "redirect-to-https"    
+    compress               = true
+    cache_policy_id = data.aws_cloudfront_cache_policy.ManagedCachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-CORS-S3Origin.id
 
   }
 
@@ -68,7 +56,6 @@ resource "aws_cloudfront_distribution" "test_distribution" {
   }
 
 }
-
 
 
 #CloudFront for Portal bucket
@@ -88,18 +75,11 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.portal_s3_origin_id
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    target_origin_id = local.portal_s3_origin_id    
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    origin_request_policy_id = "CORS-S3Origin"
+    compress               = true
+    cache_policy_id = data.aws_cloudfront_cache_policy.ManagedCachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-CORS-S3Origin.id
 
   }
 
@@ -134,18 +114,11 @@ resource "aws_cloudfront_distribution" "header_distribution" {
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.header_s3_origin_id
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    target_origin_id = local.header_s3_origin_id    
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    origin_request_policy_id = "CORS-S3Origin"
+    compress               = true
+    cache_policy_id = data.aws_cloudfront_cache_policy.ManagedCachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-CORS-S3Origin.id
 
   }
 
@@ -181,18 +154,11 @@ resource "aws_cloudfront_distribution" "sidebar_distribution" {
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.sidebar_s3_origin_id
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    target_origin_id = local.sidebar_s3_origin_id    
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    origin_request_policy_id = "CORS-S3Origin"
+    compress               = true
+    cache_policy_id = data.aws_cloudfront_cache_policy.ManagedCachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-CORS-S3Origin.id
 
   }
 
@@ -226,18 +192,11 @@ resource "aws_cloudfront_distribution" "user_distribution" {
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.user_s3_origin_id
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    target_origin_id = local.user_s3_origin_id   
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    origin_request_policy_id = "CORS-S3Origin"
+    compress               = true
+    cache_policy_id = data.aws_cloudfront_cache_policy.ManagedCachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-CORS-S3Origin.id
 
   }
 
@@ -273,19 +232,11 @@ resource "aws_cloudfront_distribution" "styleguide_distribution" {
  default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.styleguide_s3_origin_id
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
+    target_origin_id = local.styleguide_s3_origin_id    
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    origin_request_policy_id = "CORS-S3Origin"
-
+    compress               = true
+    cache_policy_id = data.aws_cloudfront_cache_policy.ManagedCachingOptimized.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.Managed-CORS-S3Origin.id
   }
 
   price_class = "PriceClass_All"
