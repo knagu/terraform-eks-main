@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "header" {
   policy = file("policies/header-policy.json")
 
   website {
-    index_document = "index.html"  
+    index_document = "daxeos-header.js"  
   }
   cors_rule {
     allowed_headers = ["*"]
@@ -75,7 +75,7 @@ resource "aws_s3_bucket" "sidebar" {
   policy = file("policies/sidebar-policy.json")
 
   website {
-    index_document = "index.html"  
+    index_document = "daxeos-sidebar.js"  
   }
   cors_rule {
     allowed_headers = ["*"]
@@ -105,7 +105,7 @@ resource "aws_s3_bucket" "styleguide" {
   policy = file("policies/styleguide-policy.json")
 
   website {
-    index_document = "index.html"  
+    index_document = "daxeos-styleguide.js"  
   }
   cors_rule {
     allowed_headers = ["*"]
@@ -135,7 +135,7 @@ resource "aws_s3_bucket" "test" {
   policy = file("policies/test-policy.json")
 
   website {
-    index_document = "index.html"  
+    index_document = "daxeos-test-mfe.js"  
   }
   cors_rule {
     allowed_headers = ["*"]
@@ -165,7 +165,7 @@ resource "aws_s3_bucket" "user" {
   policy = file("policies/user-policy.json")
 
   website {
-    index_document = "index.html"  
+    index_document = "daxeos-user-mfe.js"  
   }
   cors_rule {
     allowed_headers = ["*"]
