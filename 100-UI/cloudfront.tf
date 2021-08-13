@@ -16,7 +16,7 @@ data "aws_cloudfront_origin_request_policy" "Managed-CORS-S3Origin" {
 
 #Origin access identity for CloudFront
 resource "aws_cloudfront_origin_access_identity" "OAI" {
-  comment = "OAI access identity for S3 bucket"
+  comment = "OAI access identity for ${var.env}-S3 buckets"
 }
 
 /*
@@ -74,7 +74,7 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
   default_root_object = "index.html"
   is_ipv6_enabled     = true
 
-  aliases = ["${var.env}-portal.daxeos.io"]
+  //aliases = ["${var.env}-portal.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -94,8 +94,9 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
-    ssl_support_method  = "sni-only"
+    //acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
+    //ssl_support_method  = "sni-only"
+    cloudfront_default_certificate = true
   }
 
 }
@@ -114,7 +115,7 @@ resource "aws_cloudfront_distribution" "header_distribution" {
   comment         = "CloudFront Distribution for ${var.env}-header.daxeos.io"
   is_ipv6_enabled = true
 
-  aliases = ["${var.env}-header.daxeos.io"]
+  //aliases = ["${var.env}-header.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -134,8 +135,9 @@ resource "aws_cloudfront_distribution" "header_distribution" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
-    ssl_support_method  = "sni-only"
+    //acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
+    //ssl_support_method  = "sni-only"
+    cloudfront_default_certificate = true
   }
 
 }
