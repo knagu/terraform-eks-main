@@ -19,7 +19,7 @@ resource "aws_cloudfront_origin_access_identity" "OAI" {
   comment = "OAI access identity for ${var.env}-S3 buckets"
 }
 
-/*
+
 #CloudFront for Test bucket
 resource "aws_cloudfront_distribution" "test_distribution" {
   origin {
@@ -59,7 +59,7 @@ resource "aws_cloudfront_distribution" "test_distribution" {
 
 }
 
-*/
+
 #CloudFront for Portal bucket
 resource "aws_cloudfront_distribution" "portal_distribution" {
   origin {
@@ -74,7 +74,7 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
   default_root_object = "index.html"
   is_ipv6_enabled     = true
 
-  //aliases = ["${var.env}-portal.daxeos.io"]
+  aliases = ["${var.env}-portal.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -94,9 +94,8 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
     }
   }
   viewer_certificate {
-    //acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
-    //ssl_support_method  = "sni-only"
-    cloudfront_default_certificate = true
+    acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
+    ssl_support_method  = "sni-only"    
   }
 
 }
@@ -115,7 +114,7 @@ resource "aws_cloudfront_distribution" "header_distribution" {
   comment         = "CloudFront Distribution for ${var.env}-header.daxeos.io"
   is_ipv6_enabled = true
 
-  //aliases = ["${var.env}-header.daxeos.io"]
+  aliases = ["${var.env}-header.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -135,13 +134,12 @@ resource "aws_cloudfront_distribution" "header_distribution" {
     }
   }
   viewer_certificate {
-    //acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
-    //ssl_support_method  = "sni-only"
-    cloudfront_default_certificate = true
+    acm_certificate_arn = "arn:aws:acm:us-west-2:252540742691:certificate/5ea332d3-9e4c-4a82-8149-b30cd3aaf145"
+    ssl_support_method  = "sni-only"    
   }
 
 }
-/*
+
 #CloudFront for Sidebar bucket
 resource "aws_cloudfront_distribution" "sidebar_distribution" {
   origin {
@@ -258,4 +256,3 @@ resource "aws_cloudfront_distribution" "styleguide_distribution" {
     ssl_support_method  = "sni-only"
   }
 }
-*/
