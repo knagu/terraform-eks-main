@@ -42,4 +42,4 @@ output "styleguide_cdn_domain_name" {
 output "user_cdn_domain_name" {
   value = aws_cloudfront_distribution.user_distribution.domain_name
 }
-*?
+*/
