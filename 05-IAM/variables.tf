@@ -9,6 +9,6 @@ variable "aws_secret_key" {
 
 }
 
-variable "" {
+variable "env" {
   default = "xyz"
 }
