@@ -1,10 +1,10 @@
 locals {
-  test_s3_origin_id       = "testS3Origin"
-  portal_s3_origin_id     = "portalS3Origin"
-  styleguide_s3_origin_id = "styleguideS3Origin"
-  header_s3_origin_id     = "headerS3Origin"
-  sidebar_s3_origin_id    = "sidebarS3Origin"
-  user_s3_origin_id       = "userS3Origin"
+  test_s3_origin_id       = "${var.env}-testS3Origin"
+  portal_s3_origin_id     = "${var.env}-portalS3Origin"
+  styleguide_s3_origin_id = "${var.env}-styleguideS3Origin"
+  header_s3_origin_id     = "${var.env}-headerS3Origin"
+  sidebar_s3_origin_id    = "${var.env}-sidebarS3Origin"
+  user_s3_origin_id       = "${var.env}-userS3Origin"
 }
 data "aws_cloudfront_cache_policy" "ManagedCachingOptimized" {
   name = "Managed-CachingOptimized"
@@ -19,7 +19,7 @@ resource "aws_cloudfront_origin_access_identity" "OAI" {
   comment = "OAI access identity for S3 bucket"
 }
 
-
+/*
 #CloudFront for Test bucket
 resource "aws_cloudfront_distribution" "test_distribution" {
   origin {
@@ -30,10 +30,10 @@ resource "aws_cloudfront_distribution" "test_distribution" {
     }
   }
   enabled         = true
-  comment         = "CloudFront Distribution for test.daxeos.io"
+  comment         = "CloudFront Distribution for ${var.env}-test.daxeos.io"
   is_ipv6_enabled = true
 
-  aliases = ["test.daxeos.io"]
+  aliases = ["${var.env}-test.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -59,7 +59,7 @@ resource "aws_cloudfront_distribution" "test_distribution" {
 
 }
 
-
+*/
 #CloudFront for Portal bucket
 resource "aws_cloudfront_distribution" "portal_distribution" {
   origin {
@@ -70,11 +70,11 @@ resource "aws_cloudfront_distribution" "portal_distribution" {
     }
   }
   enabled             = true
-  comment             = "CloudFront Distribution for portal.daxeos.io"
+  comment             = "CloudFront Distribution for ${var.env}-portal.daxeos.io"
   default_root_object = "index.html"
   is_ipv6_enabled     = true
 
-  aliases = ["portal.daxeos.io"]
+  aliases = ["${var.env}-portal.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -111,10 +111,10 @@ resource "aws_cloudfront_distribution" "header_distribution" {
     }
   }
   enabled         = true
-  comment         = "CloudFront Distribution for header.daxeos.io"
+  comment         = "CloudFront Distribution for ${var.env}-header.daxeos.io"
   is_ipv6_enabled = true
 
-  aliases = ["header.daxeos.io"]
+  aliases = ["${var.env}-header.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -139,7 +139,7 @@ resource "aws_cloudfront_distribution" "header_distribution" {
   }
 
 }
-
+/*
 #CloudFront for Sidebar bucket
 resource "aws_cloudfront_distribution" "sidebar_distribution" {
   origin {
@@ -150,10 +150,10 @@ resource "aws_cloudfront_distribution" "sidebar_distribution" {
     }
   }
   enabled         = true
-  comment         = "CloudFront Distribution for sidebar.daxeos.io"
+  comment         = "CloudFront Distribution for ${var.env}-sidebar.daxeos.io"
   is_ipv6_enabled = true
 
-  aliases = ["sidebar.daxeos.io"]
+  aliases = ["${var.env}-sidebar.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -189,10 +189,10 @@ resource "aws_cloudfront_distribution" "user_distribution" {
     }
   }
   enabled         = true
-  comment         = "CloudFront Distribution for user.daxeos.io"
+  comment         = "CloudFront Distribution for ${var.env}-user.daxeos.io"
   is_ipv6_enabled = true
 
-  aliases = ["user.daxeos.io"]
+  aliases = ["${var.env}-user.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -230,10 +230,10 @@ resource "aws_cloudfront_distribution" "styleguide_distribution" {
     }
   }
   enabled         = true
-  comment         = "CloudFront Distribution for styleguide.daxeos.io"
+  comment         = "CloudFront Distribution for ${var.env}-styleguide.daxeos.io"
   is_ipv6_enabled = true
 
-  aliases = ["styleguide.daxeos.io"]
+  aliases = ["${var.env}-styleguide.daxeos.io"]
 
   default_cache_behavior {
     allowed_methods          = ["GET", "HEAD", "OPTIONS"]
@@ -256,3 +256,4 @@ resource "aws_cloudfront_distribution" "styleguide_distribution" {
     ssl_support_method  = "sni-only"
   }
 }
+*/

@@ -4,7 +4,7 @@
 ########## VPC USER ###########
 ################################
 resource "aws_iam_user" "vpc" {
-  name = "vpc-user"
+  name = "${var.env}-vpc-user"
   path = "/terraform/"
 }
 
@@ -41,7 +41,7 @@ EOF
 ################################
 
 resource "aws_iam_user" "sg" {
-  name = "sg-user"
+  name = "${var.env}-sg-user"
   path = "/terraform/"
 }
 
@@ -90,7 +90,7 @@ EOF
 ################################
 
 resource "aws_iam_user" "ecr" {
-  name = "ecr-user"
+  name = "${var.env}-ecr-user"
   path = "/terraform/"
 }
 
@@ -132,7 +132,7 @@ EOF
 ################################
 
 resource "aws_iam_user" "codeartifact" {
-  name = "codeartifact-user"
+  name = "${var.env}-codeartifact-user"
   path = "/terraform/"
 }
 
@@ -177,7 +177,7 @@ EOF
 ########## MSSQL USER ##########
 ################################
 resource "aws_iam_user" "mssql" {
-  name = "mssql-user"
+  name = "${var.env}-mssql-user"
   path = "/terraform/"
 }
 
@@ -218,7 +218,7 @@ EOF
 ########## EKS USER ##########
 ################################
 resource "aws_iam_user" "eks" {
-  name = "eks-user"
+  name = "${var.env}-eks-user"
   path = "/terraform/"
 }
 
@@ -266,43 +266,11 @@ EOF
 }
 
 
-###### ACM USER #######
-########################
-
-resource "aws_iam_user" "acm" {
-  name = "acm-user"
-  path = "/terraform/"
-}
-
-resource "aws_iam_access_key" "acm_access_key" {
-  user = aws_iam_user.acm.name
-}
-
-resource "aws_iam_user_policy" "acm_user_policy" {
-  name = "acm-user-policy"
-  user = aws_iam_user.acm.name
-
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [              
-              "acm:*"
-      ],
-            "Resource": "*"
-        }
-    ]
-}
-EOF
-}
-
 ###### UI USER #######
 ########################
 
 resource "aws_iam_user" "ui" {
-  name = "ui-user"
+  name = "${var.env}-ui-user"
   path = "/terraform/"
 }
 
@@ -332,4 +300,3 @@ resource "aws_iam_user_policy" "ui_user_policy" {
 }
 EOF
 }
-

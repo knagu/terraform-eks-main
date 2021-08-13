@@ -60,14 +60,3 @@ output "ui_secret" {
   value     = base64encode(aws_iam_access_key.ui_access_key.secret)
   sensitive = true
 }
-
-output "acm_access" {
-  value = aws_iam_access_key.acm_access_key.id
-}
-
-output "acm_secret" {
-  value     = base64encode(aws_iam_access_key.acm_access_key.secret)
-  sensitive = true
-}
-
-

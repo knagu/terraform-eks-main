@@ -4,13 +4,14 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "05-IAM"
+      name = "xyz-05-IAM"
     }
   }
 }
 
+
 resource "aws_s3_bucket" "header" {
-  bucket = "header.daxeos.io"
+  bucket = "${var.env}-header.daxeos.io"
   acl    = "private"
   policy = <<EOF
 {
@@ -25,7 +26,7 @@ resource "aws_s3_bucket" "header" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::header.daxeos.io/*"                
+                "arn:aws:s3:::${var.env}-header.daxeos.io/*"                
             ]
         }
     ]
@@ -42,7 +43,7 @@ EOF
     expose_headers  = []
   }
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
   force_destroy = true
 }
@@ -58,7 +59,7 @@ resource "aws_s3_bucket_public_access_block" "header" {
 #################################################################################
 
 resource "aws_s3_bucket" "portal" {
-  bucket = "portal.daxeos.io"
+  bucket = "${var.env}-portal.daxeos.io"
   acl    = "private"
   policy = <<EOF
 {
@@ -73,7 +74,7 @@ resource "aws_s3_bucket" "portal" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::portal.daxeos.io/*"
+                "arn:aws:s3:::${var.env}-portal.daxeos.io/*"
             ]
         }
     ]
@@ -90,7 +91,7 @@ EOF
     expose_headers  = []
   }
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
   force_destroy = true
 }
@@ -105,6 +106,7 @@ resource "aws_s3_bucket_public_access_block" "portal" {
 
 #################################################################################
 
+/*
 resource "aws_s3_bucket" "sidebar" {
   bucket = "sidebar.daxeos.io"
   acl    = "private"
@@ -121,7 +123,7 @@ resource "aws_s3_bucket" "sidebar" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::sidebar.daxeos.io/*"
+                "arn:aws:s3:::${var.env}-sidebar.daxeos.io/*"
             ]
         }
     ]
@@ -138,7 +140,7 @@ EOF
     expose_headers  = []
   }
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
   force_destroy = true
 }
@@ -154,7 +156,7 @@ resource "aws_s3_bucket_public_access_block" "sidebar" {
 #################################################################################
 
 resource "aws_s3_bucket" "styleguide" {
-  bucket = "styleguide.daxeos.io"
+  bucket = "${var.env}-styleguide.daxeos.io"
   acl    = "private"
   policy = <<EOF
 {
@@ -169,7 +171,7 @@ resource "aws_s3_bucket" "styleguide" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::styleguide.daxeos.io/*"
+                "arn:aws:s3:::${var.env}-styleguide.daxeos.io/*"
             ]
         }
     ]
@@ -186,7 +188,7 @@ EOF
     expose_headers  = []
   }
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
   force_destroy = true
 }
@@ -202,7 +204,7 @@ resource "aws_s3_bucket_public_access_block" "styleguide" {
 #################################################################################
 
 resource "aws_s3_bucket" "test" {
-  bucket = "test.daxeos.io"
+  bucket = "${var.env}-test.daxeos.io"
   acl    = "private"
   policy = <<EOF
 {
@@ -217,7 +219,7 @@ resource "aws_s3_bucket" "test" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::test.daxeos.io/*"
+                "arn:aws:s3:::${var.env}-test.daxeos.io/*"
             ]
         }
     ]
@@ -234,7 +236,7 @@ EOF
     expose_headers  = []
   }
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
   force_destroy = true
 }
@@ -250,7 +252,7 @@ resource "aws_s3_bucket_public_access_block" "test" {
 #################################################################################
 
 resource "aws_s3_bucket" "user" {
-  bucket = "user.daxeos.io"
+  bucket = "${var.env}-user.daxeos.io"
   acl    = "private"
   policy = <<EOF
 {
@@ -265,7 +267,7 @@ resource "aws_s3_bucket" "user" {
             },
             "Action": "s3:GetObject",
             "Resource": [
-                "arn:aws:s3:::user.daxeos.io/*"
+                "arn:aws:s3:::${var.env}-user.daxeos.io/*"
             ]
         }
     ]
@@ -281,7 +283,7 @@ EOF
     expose_headers  = []
   }
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
   force_destroy = true
 }
@@ -293,3 +295,4 @@ resource "aws_s3_bucket_public_access_block" "user" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+*/
