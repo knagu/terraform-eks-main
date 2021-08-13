@@ -322,8 +322,7 @@ resource "aws_iam_user_policy" "ui_user_policy" {
             "Effect": "Allow",
             "Action": [              
               "cloudfront:*",
-              "s3:*",
-              "iam:*"
+              "s3:*"              
 
       ],
             "Resource": "*"
