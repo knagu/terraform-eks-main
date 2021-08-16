@@ -4,7 +4,7 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "05-IAM"
+      name = "dev-05-IAM"
     }
   }
 }
@@ -17,8 +17,9 @@ resource "aws_codeartifact_domain" "codeartifact_domain" {
   domain         = var.codeartifact_domain
   encryption_key = aws_kms_key.codeartifact_key.arn
 }
+
 resource "aws_codeartifact_repository" "codeartifact_upstream" {
-  repository = var.codeartifact_upstream
+  repository = "${var.prefix}-${var.project}-${var.env}-codeartifact-uswest2-nuget-store"
   domain     = aws_codeartifact_domain.codeartifact_domain.domain
 
   external_connections {
@@ -27,7 +28,7 @@ resource "aws_codeartifact_repository" "codeartifact_upstream" {
 }
 
 resource "aws_codeartifact_repository" "codeartifact_repository" {
-  repository = var.codeartifact_repository
+  repository = "${var.prefix}-${var.project}-${var.env}-codeartifact-uswest2-daxeos"
   domain     = aws_codeartifact_domain.codeartifact_domain.domain
 
   upstream {

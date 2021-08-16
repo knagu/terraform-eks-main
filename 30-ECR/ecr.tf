@@ -4,23 +4,23 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "05-IAM"
+      name = "dev-05-IAM"
     }
   }
 }
 
 resource "aws_ecr_repository" "ecr" {
-  name                 = "weatherapi"
+  name                 = "${var.prefix}-${var.project}-${var.env}-ecr-uswest2-weatherapi"
   image_tag_mutability = "MUTABLE"
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
 }
 
 resource "aws_ecr_repository" "user" {
-  name                 = "user"
+  name                 = "${var.prefix}-${var.project}-${var.env}-ecr-uswest2-user"
   image_tag_mutability = "MUTABLE"
   tags = {
-    Environment = "dev"
+    Environment = "${var.env}"
   }
 }

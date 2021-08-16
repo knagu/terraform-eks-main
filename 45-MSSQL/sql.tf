@@ -4,7 +4,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "10-VPC"
+      name = "dev-10-VPC"
     }
   }
 }
@@ -15,7 +15,7 @@ data "terraform_remote_state" "sg" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "20-SG"
+      name = "dev-20-SG"
     }
   }
 }
@@ -26,14 +26,14 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "05-IAM"
+      name = "dev-05-IAM"
     }
   }
 }
 
 locals {
   tags = {
-    Environment = "learning"
+    Environment = "${var.env}"
   }
 }
 
@@ -41,7 +41,7 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 3.0"
 
-  identifier = "learning-db-mssql"
+  identifier = "${var.prefix}-${var.project}-${var.env}-rds-${var.aws_region}-sqlserver"
 
 
   engine               = "sqlserver-ex" # SQL server edition (express, standard, web, enterprise)

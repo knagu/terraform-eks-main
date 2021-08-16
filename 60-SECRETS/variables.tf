@@ -12,3 +12,7 @@ variable "registry_password" {
 variable "sql_password" {
   
 }
+
+variable "env" {
+  default = "dev"
+}

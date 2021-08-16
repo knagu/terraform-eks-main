@@ -4,7 +4,7 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "xyz-05-IAM"
+      name = "dev-05-IAM"
     }
   }
 }

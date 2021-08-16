@@ -4,7 +4,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "10-VPC"
+      name = "dev-10-VPC"
     }
   }
 }
@@ -15,13 +15,13 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "05-IAM"
+      name = "dev-05-IAM"
     }
   }
 }
 
 resource "aws_security_group" "worker_group" {
-  name   = "worker_group_node"
+  name   = "${var.prefix}-${var.project}-${var.env}-sg-${var.aws_region}-workergroup"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {
@@ -46,7 +46,7 @@ resource "aws_security_group" "worker_group" {
 }
 
 resource "aws_security_group" "sql_server" {
-  name   = "sql_server_sg"
+  name   = "${var.prefix}-${var.project}-${var.env}-sg-${var.aws_region}-sqlserver"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {
@@ -63,13 +63,3 @@ resource "aws_security_group" "sql_server" {
   }
 }
 
-
-output "worker_security_group_id" {
-  description = "Security group ids attached to the worker node."
-  value       = [aws_security_group.worker_group.id]
-}
-
-output "database_security_group_id" {
-  description = "Security group ids attached to the db."
-  value       = [aws_security_group.sql_server.id]
-}

@@ -6,10 +6,14 @@ variable "codeartifact_domain" {
   default = "daxeos"
 }
 
-variable "codeartifact_repository" {
-  default = "sample"
+variable "prefix" {
+  default = "dax"
 }
 
-variable "codeartifact_upstream" {
-  default = "nuget-store"
+variable "project" {
+  default = "coreinfra"
+}
+
+variable "env" {
+  default = "dev"
 }

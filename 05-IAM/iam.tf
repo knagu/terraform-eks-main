@@ -3,8 +3,8 @@
 
 ########## VPC USER ###########
 ################################
-resource "aws_iam_user" "vpc" {
-  name = "${var.env}-vpc-user"
+resource "aws_iam_user" "vpc" {  
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-vpc"
   path = "/terraform/"
 }
 
@@ -13,7 +13,7 @@ resource "aws_iam_access_key" "vpc_access_key" {
 }
 
 resource "aws_iam_user_policy" "vpc_user_policy" {
-  name = "vpc-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-vpc"
   user = aws_iam_user.vpc.name
 
   policy = <<EOF
@@ -41,7 +41,7 @@ EOF
 ################################
 
 resource "aws_iam_user" "sg" {
-  name = "${var.env}-sg-user"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-sg"
   path = "/terraform/"
 }
 
@@ -50,7 +50,7 @@ resource "aws_iam_access_key" "sg_access_key" {
 }
 
 resource "aws_iam_user_policy" "sg_user_policy" {
-  name = "sg-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-sg"
   user = aws_iam_user.sg.name
 
   policy = <<EOF
@@ -90,7 +90,7 @@ EOF
 ################################
 
 resource "aws_iam_user" "ecr" {
-  name = "${var.env}-ecr-user"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-ecr"
   path = "/terraform/"
 }
 
@@ -99,7 +99,7 @@ resource "aws_iam_access_key" "ecr_access_key" {
 }
 
 resource "aws_iam_user_policy" "ecr_user_policy" {
-  name = "ecr-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-ecr"
   user = aws_iam_user.ecr.name
 
   policy = <<EOF
@@ -132,7 +132,7 @@ EOF
 ################################
 
 resource "aws_iam_user" "codeartifact" {
-  name = "${var.env}-codeartifact-user"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-codeartifact"
   path = "/terraform/"
 }
 
@@ -141,7 +141,7 @@ resource "aws_iam_access_key" "codeartifact_access_key" {
 }
 
 resource "aws_iam_user_policy" "codeartifact_user_policy" {
-  name = "ecr-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-codeartifact"
   user = aws_iam_user.codeartifact.name
 
   policy = <<EOF
@@ -177,7 +177,7 @@ EOF
 ########## MSSQL USER ##########
 ################################
 resource "aws_iam_user" "mssql" {
-  name = "${var.env}-mssql-user"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-mssql"
   path = "/terraform/"
 }
 
@@ -186,7 +186,7 @@ resource "aws_iam_access_key" "mssql_access_key" {
 }
 
 resource "aws_iam_user_policy" "mssql_user_policy" {
-  name = "mssql-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-mssql"
   user = aws_iam_user.mssql.name
 
   policy = <<EOF
@@ -218,7 +218,7 @@ EOF
 ########## EKS USER ##########
 ################################
 resource "aws_iam_user" "eks" {
-  name = "${var.env}-eks-user"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-eks"
   path = "/terraform/"
 }
 
@@ -227,7 +227,7 @@ resource "aws_iam_access_key" "eks_access_key" {
 }
 
 resource "aws_iam_user_policy" "eks_user_policy" {
-  name = "mssql-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-eks"
   user = aws_iam_user.eks.name
 
   policy = <<EOF
@@ -270,7 +270,7 @@ EOF
 ########################
 
 resource "aws_iam_user" "ui" {
-  name = "${var.env}-ui-user"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-user-ui"
   path = "/terraform/"
 }
 
@@ -279,7 +279,7 @@ resource "aws_iam_access_key" "ui_access_key" {
 }
 
 resource "aws_iam_user_policy" "ui_user_policy" {
-  name = "ui-user-policy"
+  name = "${var.prefix}-${var.project}-${var.env}-iam-userpolicy-ui"
   user = aws_iam_user.ui.name
 
   policy = <<EOF

@@ -4,7 +4,7 @@ data "terraform_remote_state" "mssql" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "45-MSSQL"
+      name = "dev-45-MSSQL"
     }
   }
 }
@@ -14,7 +14,7 @@ data "terraform_remote_state" "ecr" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "30-ECR"
+      name = "dev-30-ECR"
     }
   }
 }
@@ -24,7 +24,7 @@ data "terraform_remote_state" "sg" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "20-SG"
+      name = "dev-20-SG"
     }
   }
 }
@@ -34,7 +34,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "10-VPC"
+      name = "dev-10-VPC"
     }
   }
 }
@@ -45,7 +45,7 @@ data "terraform_remote_state" "iam" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "05-IAM"
+      name = "dev-05-IAM"
     }
   }
 }
@@ -57,7 +57,7 @@ module "eks" {
   subnets         = data.terraform_remote_state.vpc.outputs.private_subnets
 
   tags = {
-    Environment = "learning"
+    Environment = "${var.env}"
   }
 
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
@@ -69,7 +69,7 @@ module "eks" {
 
   worker_groups = [
     {
-      name                          = "worker-group-1"
+      name                          = "${var.prefix}-${var.project}-${var.env}-eks-${var.aws_region}-wgnode"
       instance_type                 = "t2.medium"      
       asg_min_size                  = 1
       asg_max_size                  = 1

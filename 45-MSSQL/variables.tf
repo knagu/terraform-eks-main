@@ -5,3 +5,15 @@ variable "aws_region" {
 variable "sql_password" {
 
 }
+
+variable "prefix" {
+  default = "dax"
+}
+
+variable "project" {
+  default = "coreinfra"
+}
+
+variable "env" {
+  default = "dev"
+}

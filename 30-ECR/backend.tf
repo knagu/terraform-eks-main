@@ -4,7 +4,7 @@ terraform {
     organization = "Harika"
 
     workspaces {
-      name = "30-ECR"
+      name = "dev-30-ECR"
     }
   }
 }

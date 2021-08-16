@@ -4,7 +4,7 @@ terraform {
     organization = "Harika"
 
     workspaces {
-      name = "20-SG"
+      name = "dev-20-SG"
     }
   }
 }

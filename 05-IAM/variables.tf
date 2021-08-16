@@ -9,6 +9,14 @@ variable "aws_secret_key" {
 
 }
 
+variable "prefix" {
+  default = "dax"
+}
+
+variable "project" {
+  default = "coreinfra"
+}
+
 variable "env" {
-  default = "xyz"
+  default = "dev"
 }

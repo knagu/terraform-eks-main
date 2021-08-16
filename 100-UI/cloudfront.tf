@@ -1,10 +1,10 @@
 locals {
-  test_s3_origin_id       = "${var.env}-testS3Origin"
-  portal_s3_origin_id     = "${var.env}-portalS3Origin"
-  styleguide_s3_origin_id = "${var.env}-styleguideS3Origin"
-  header_s3_origin_id     = "${var.env}-headerS3Origin"
-  sidebar_s3_origin_id    = "${var.env}-sidebarS3Origin"
-  user_s3_origin_id       = "${var.env}-userS3Origin"
+  test_s3_origin_id       = "${var.prefix}-${var.project}-${var.env}-cloudfront-testS3Origin"
+  portal_s3_origin_id     = "${var.prefix}-${var.project}-${var.env}-cloudfront-portalS3Origin"
+  styleguide_s3_origin_id = "${var.prefix}-${var.project}-${var.env}-cloudfront-styleguideS3Origin"
+  header_s3_origin_id     = "${var.prefix}-${var.project}-${var.env}-cloudfront-headerS3Origin"
+  sidebar_s3_origin_id    = "${var.prefix}-${var.project}-${var.env}-cloudfront-sidebarS3Origin"
+  user_s3_origin_id       = "${var.prefix}-${var.project}-${var.env}-cloudfront-userS3Origin"
 }
 data "aws_cloudfront_cache_policy" "ManagedCachingOptimized" {
   name = "Managed-CachingOptimized"
@@ -16,7 +16,7 @@ data "aws_cloudfront_origin_request_policy" "Managed-CORS-S3Origin" {
 
 #Origin access identity for CloudFront
 resource "aws_cloudfront_origin_access_identity" "OAI" {
-  comment = "OAI access identity for ${var.env}-S3 buckets"
+  comment = "OAI access identity for ${var.prefix}-${var.project}-${var.env}-S3 buckets"
 }
 
 

@@ -3,7 +3,7 @@ terraform {
     organization = "Harika"
 
     workspaces {
-      name = "10-VPC"
+      name = "dev-10-VPC"
     }
   }
 }

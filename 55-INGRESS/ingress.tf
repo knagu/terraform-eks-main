@@ -17,7 +17,7 @@ module "alb_ingress_controller" {
   k8s_cluster_type = "eks"
   k8s_namespace = "kube-system"
   aws_vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
-  aws_region_name  = "us-west-2"
+  aws_region_name  = "${var.aws_region}"
   k8s_cluster_name = data.terraform_remote_state.vpc.outputs.cluster_name
   depends_on = [
     aws_iam_openid_connect_provider.default
