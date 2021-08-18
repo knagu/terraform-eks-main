@@ -12,7 +12,7 @@ data "terraform_remote_state" "iam" {
 }
 
 locals {
-  cluster_name = "${var.prefix}-${var.project}-${var.env}-eks-${var.aws_region}"
+  cluster_name = "${var.prefix}-${var.project}-${var.env}-eks-uswest2"
   network_acls = {    
     database_inbound = [
       {
@@ -47,7 +47,7 @@ module "vpc" {
   source  = ".\\Modules\\vpc"
   //version = "2.66.0"
 
-  name                           = "${var.prefix}-${var.project}-${var.env}-vpc-${var.aws_region}"
+  name                           = "${var.prefix}-${var.project}-${var.env}-vpc-uswest2"
   cidr                           = "10.0.0.0/16"
   azs                            = data.aws_availability_zones.available.names
   private_subnets                = ["10.0.1.0/24", "10.0.2.0/24"]
@@ -63,8 +63,8 @@ module "vpc" {
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
-  default_security_group_name = "${var.prefix}-${var.project}-${var.env}-sg-${var.aws_region}-default"
-  default_network_acl_name = "${var.prefix}-${var.project}-${var.env}-nacl-${var.aws_region}-default" 
+  default_security_group_name = "${var.prefix}-${var.project}-${var.env}-sg-uswest2-default"
+  default_network_acl_name = "${var.prefix}-${var.project}-${var.env}-nacl-uswest2-default" 
   prefix = "${var.prefix}" 
   project = "${var.project}"
   env = "${var.env}"
@@ -83,6 +83,6 @@ module "vpc" {
     "kubernetes.io/role/internal-elb"             = "1"
   }
   database_subnet_tags = {       
-    Environment = "dev"
+    Environment = "${var.aws_region}"
   }
 }

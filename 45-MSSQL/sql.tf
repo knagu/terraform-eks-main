@@ -41,7 +41,7 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 3.0"
 
-  identifier = "${var.prefix}-${var.project}-${var.env}-rds-${var.aws_region}-sqlserver"
+  identifier = "${var.prefix}-${var.project}-${var.env}-rds-uswest2-sqlserver"
 
 
   engine               = "sqlserver-ex" # SQL server edition (express, standard, web, enterprise)

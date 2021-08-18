@@ -21,7 +21,7 @@ data "terraform_remote_state" "iam" {
 }
 
 resource "aws_security_group" "worker_group" {
-  name   = "${var.prefix}-${var.project}-${var.env}-sg-${var.aws_region}-workergroup"
+  name   = "${var.prefix}-${var.project}-${var.env}-sg-uswest2-workergroup"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {
@@ -46,7 +46,7 @@ resource "aws_security_group" "worker_group" {
 }
 
 resource "aws_security_group" "sql_server" {
-  name   = "${var.prefix}-${var.project}-${var.env}-sg-${var.aws_region}-sqlserver"
+  name   = "${var.prefix}-${var.project}-${var.env}-sg-uswest2-sqlserver"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {

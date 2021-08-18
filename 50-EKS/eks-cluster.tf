@@ -1,23 +1,3 @@
-data "terraform_remote_state" "mssql" {
-  backend = "remote"
-
-  config = {
-    organization = "Harika"
-    workspaces = {
-      name = "dev-45-MSSQL"
-    }
-  }
-}
-data "terraform_remote_state" "ecr" {
-  backend = "remote"
-
-  config = {
-    organization = "Harika"
-    workspaces = {
-      name = "dev-30-ECR"
-    }
-  }
-}
 data "terraform_remote_state" "sg" {
   backend = "remote"
 
@@ -69,7 +49,7 @@ module "eks" {
 
   worker_groups = [
     {
-      name                          = "${var.prefix}-${var.project}-${var.env}-eks-${var.aws_region}-wgnode"
+      name                          = "wgnode"
       instance_type                 = "t2.medium"      
       asg_min_size                  = 1
       asg_max_size                  = 1
