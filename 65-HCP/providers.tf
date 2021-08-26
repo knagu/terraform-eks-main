@@ -5,6 +5,11 @@ terraform {
       version = ">= 3.20.0"
     }
 
+    hcp = {
+      source = "hashicorp/hcp"
+      version = "0.14.0"
+    }
+
     random = {
       source  = "hashicorp/random"
       version = "3.0.0"
@@ -29,18 +34,18 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = ">= 2.0.1"
     }
-
-    helm = {
-      source = "hashicorp/helm"
-      version = "2.2.0"
-    }
   }
 
   required_version = "> 0.12"
 }
 
-provider "aws" { 
-  access_key = data.terraform_remote_state.iam.outputs.eks_access
-  secret_key = base64decode(data.terraform_remote_state.iam.outputs.eks_secret)
+provider "aws" {
+  access_key = data.terraform_remote_state.iam.outputs.vpc_access
+  secret_key = base64decode(data.terraform_remote_state.iam.outputs.vpc_secret)
   region = var.aws_region
+}
+
+provider "hcp" {
+  client_id     = var.hcp_client_id
+  client_secret = var.hcp_client_secret
 }
