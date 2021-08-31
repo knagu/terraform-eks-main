@@ -26,7 +26,7 @@ data "terraform_remote_state" "hcp" {
   config = {
     organization = "Harika"
     workspaces = {
-      name = "65-HCP"
+      name = "dev-35-HCP"
     }
   }
 }
