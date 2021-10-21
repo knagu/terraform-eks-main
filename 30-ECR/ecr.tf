@@ -17,8 +17,8 @@ resource "aws_ecr_repository" "ecr" {
   }
 }
 
-resource "aws_ecr_repository" "user" {
-  name                 = "${var.prefix}-${var.project}-${var.env}-ecr-uswest2-user"
+resource "aws_ecr_repository" "weatherapi-mfe" {
+  name                 = "${var.prefix}-${var.project}-${var.env}-ecr-uswest2-weatherapi-mfe"
   image_tag_mutability = "MUTABLE"
   tags = {
     Environment = "${var.env}"
